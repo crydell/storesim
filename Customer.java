@@ -39,4 +39,8 @@ public class Customer {
     public boolean isDone(){
 	return this.groceries == 0;
     }
+
+    public String toString(){
+	return "@"+groceries;
+    }
 }

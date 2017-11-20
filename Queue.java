@@ -49,7 +49,7 @@ public class Queue<T> implements Iterable<T>{
 
     private Node<T> first;
     private Node<T> last;
-    private int length;
+    private int length = 0;
 
     /** Empty constructor */
     public Queue(){}

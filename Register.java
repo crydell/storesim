@@ -63,7 +63,7 @@ public class Register{
      * @return <code>true</code> if the register has customers
      */
     public boolean hasCustomers(){
-	return this.queue.length() == 0;
+	return this.queue.length() > 0;
     }
 
     /**
@@ -104,5 +104,13 @@ public class Register{
      */
     public int getQueueLength(){
 	return this.queue.length();
+    }
+
+    public String toString(){
+	String result = this.open ? "[ ]" : "[X]";
+	for (Customer c : queue){
+	    result += c.toString();
+	}
+	return result;
     }
 }

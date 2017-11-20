@@ -15,14 +15,14 @@ public class Store{
      * @throws IllegalArgumentException if amountOfRegisters < 1
      */
     public Store (int amountOfRegisters){
-	if (amountOfRegisters < 1){
+	if (amountOfRegisters > 0){
 	    this.registers = new Register[amountOfRegisters];
-	    for (Register r : this.registers){
-	        r = new Register();
+	    for (int i = 0; i < amountOfRegisters; i++){
+	        registers[i] = new Register();
 	    }
 	    this.registers[0].open();
 	} else {
-	    throw new IllegalArgumentException("Store must have at least 1 customer.");
+	    throw new IllegalArgumentException("Store must have at least 1 register.");
 	}
     }
 
@@ -33,10 +33,14 @@ public class Store{
      */
     public int getAverageQueueLength(){
 	int totalCustomers = 0;
+	int openRegisters = 0;
 	for (Register r : this.registers){
-	    totalCustomers += r.getQueueLength();
+	    if (r.isOpen()){
+		openRegisters++;
+		totalCustomers += r.getQueueLength();
+	    }
 	}
-	return (totalCustomers / this.registers.length);
+	return (totalCustomers / openRegisters);
     }
 
     /**
@@ -48,7 +52,7 @@ public class Store{
 	Register shortestQueueRegister = this.registers[0];
 	
 	for (Register r : this.registers){
-	    if (r.getQueueLength() < shortestQueueRegister.getQueueLength()){
+	    if (r.getQueueLength() < shortestQueueRegister.getQueueLength() && r.isOpen()){
 		shortestQueueRegister = r;
 	    }
 	}
@@ -92,5 +96,13 @@ public class Store{
 	}
 
 	return doneQueue;
+    }
+
+    public String toString(){
+	String result = "";
+	for (Register r : this.registers){
+	    result += r.toString() + "\n";
+	}
+	return result;
     }
 }
