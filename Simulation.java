@@ -20,6 +20,9 @@ public class Simulation{
      * @param thresholdForNewRegister the highest average queue length before a new register opens
      */
     public Simulation(int amountOfRegisters, int intensity, int maxGroceries, int thresholdForNewRegister){
+	if (intensity > 100 || intensity < 0 || maxGroceries < 0 || thresholdForNewRegisters < 0){
+	    throw new IllegalArgumentException();
+	}
 	this.store = new Store(amountOfRegisters);
 	this.intensity = intensity;
 	this.maxGroceries = maxGroceries;
@@ -57,6 +60,8 @@ public class Simulation{
 	if (this.store.getAverageQueueLength() > this.thresholdForNewRegister){
 	    this.store.openNewRegister();
 	}
+
+	this.store.step();
 
 	Queue<Customer> doneCustomers = this.store.getDoneCustomers();
     }

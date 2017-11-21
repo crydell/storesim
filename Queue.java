@@ -60,6 +60,7 @@ public class Queue<T> implements Iterable<T>{
      * @return the current length of the queue
      */
     public int length(){
+	assert this.length >= 0;
 	return this.length;
     }
 
@@ -71,6 +72,7 @@ public class Queue<T> implements Iterable<T>{
      * @param element the element to add to the end of the queue
      */
     public void enqueue(T element){
+	assert element;
 	Node<T> newLastNode = new Node<T>(element);
 
 	if (this.last != null) {

@@ -65,7 +65,7 @@ public class Register{
     public boolean hasCustomers(){
 	return this.queue.length() > 0;
     }
-
+    
     /**
      * Check if the customer first in queue is done.
      *
