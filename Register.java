@@ -1,11 +1,13 @@
+import java.util.Iterator;
+
 /**
  * A register used for processing {@link Customer}s.
- * The register keeps a queue of Customers and serves 
+ * The register keeps a queue of Customers and serves
  * them when they are at the front of the queue.
  *
  * @version %I%, %G%
  */
-public class Register{
+public class Register implements Iterable<Customer>{
 
     private boolean open;
     private Queue<Customer> queue = new Queue<Customer>();
@@ -65,7 +67,7 @@ public class Register{
     public boolean hasCustomers(){
 	return this.queue.length() > 0;
     }
-    
+
     /**
      * Check if the customer first in queue is done.
      *
@@ -104,6 +106,10 @@ public class Register{
      */
     public int getQueueLength(){
 	return this.queue.length();
+    }
+
+    public Iterator<Customer> iterator(){
+	return this.queue.iterator();
     }
 
     public String toString(){

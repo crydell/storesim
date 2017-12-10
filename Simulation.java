@@ -20,7 +20,7 @@ public class Simulation{
      * @param thresholdForNewRegister the highest average queue length before a new register opens
      */
     public Simulation(int amountOfRegisters, int intensity, int maxGroceries, int thresholdForNewRegister){
-	if (intensity > 100 || intensity < 0 || maxGroceries < 0 || thresholdForNewRegisters < 0){
+	if (intensity > 100 || intensity < 0 || maxGroceries < 0 || thresholdForNewRegister < 0){
 	    throw new IllegalArgumentException();
 	}
 	this.store = new Store(amountOfRegisters);
@@ -40,8 +40,11 @@ public class Simulation{
 	case 0:
 	    newCustomer = new ImpulsiveCustomer(this.time, groceryAmount,  (int) (Math.random() * 100));
 	    break;
-	default:
+	case 1:
 	    newCustomer = new Customer(this.time, groceryAmount);
+	    break;
+	default:
+	    newCustomer = new AnalyticCustomer(this.time, groceryAmount);
 	}
 
 	return newCustomer;

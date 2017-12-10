@@ -1,5 +1,5 @@
 /**
- * A store which contains registers that 
+ * A store which contains registers that
  * are able to serve customers.
  *
  * @version %I%, %G%
@@ -44,20 +44,12 @@ public class Store{
     }
 
     /**
-     * Inserts a customer into the shortest queue
+     * Let a customer enter its desired queue
      *
      * @param c the customer to insert
      */
     public void newCustomer(Customer c){
-	Register shortestQueueRegister = this.registers[0];
-	
-	for (Register r : this.registers){
-	    if (r.getQueueLength() < shortestQueueRegister.getQueueLength() && r.isOpen()){
-		shortestQueueRegister = r;
-	    }
-	}
-
-	shortestQueueRegister.addToQueue(c);
+	c.chooseQueue(this.registers);
     }
 
     /**

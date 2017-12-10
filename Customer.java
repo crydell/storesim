@@ -1,7 +1,7 @@
 //package storesim;
 
 /**
- * A customer in a store. Has a certain 
+ * A customer in a store. Has a certain
  * amount of groceries and will be considered
  * done when all the groceries have been handled.
  *
@@ -37,7 +37,34 @@ public class Customer {
      * @return <code>true</code> if the customer has no more groceries to be served for
      */
     public boolean isDone(){
+	assert this.groceries >= 0;
+
 	return this.groceries == 0;
+    }
+
+    protected int getRegisterScore(Register register){
+	return register.isOpen() ? register.getQueueLength() : -1;
+    }
+
+    /**
+     * Choose a register to queue for.
+     *
+     * @param registers an array of available registers
+     */
+    public void chooseQueue(Register registers[]){
+	if (registers.length > 0){
+	    int bestIndex = 0;
+	    int bestScore = -1;
+
+	    for(int i = 0; i < registers.length; i++){
+		int currentScore = getRegisterScore(registers[i]);
+		if ((currentScore < bestScore && currentScore != -1) || bestScore == -1){
+		    bestScore = currentScore;
+		    bestIndex = i;
+		}
+	    }
+	    registers[bestIndex].addToQueue(this);
+	}
     }
 
     public String toString(){

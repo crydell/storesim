@@ -72,7 +72,6 @@ public class Queue<T> implements Iterable<T>{
      * @param element the element to add to the end of the queue
      */
     public void enqueue(T element){
-	assert element;
 	Node<T> newLastNode = new Node<T>(element);
 
 	if (this.last != null) {
